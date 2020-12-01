@@ -33,6 +33,7 @@ mycursor.execute(sql)
 mydb.commit()
 print(mycursor.rowcount, "rows in set.")
 
+mycursor.close()
 mydb.close()
 
 tps2 = time.time()
