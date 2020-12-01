@@ -23,12 +23,12 @@ for i in request:
         if request.index(i) < 1 :
                 value = request[0]
         else:
-                value = str(value) + " OR " + str(i)
+                value = value + " OR " + i
 
 
 mycursor = mydb.cursor()
 
-sql = "Delete from " + str(table) + " where " + str(value) + ";"
+sql = "Delete from " + table + " where " + value + ";"
 mycursor.execute(sql)
 mydb.commit()
 print(mycursor.rowcount, "rows in set.")
