@@ -1,6 +1,8 @@
+# coding: utf-8
 import time
-tps1 = time.time()
 import mysql.connector
+
+start = time.time()
 
 mydb = mysql.connector.connect(
   host="HOST",
@@ -11,24 +13,18 @@ mydb = mysql.connector.connect(
 
 table = "TABLE"
 
-request = []
-
 # EXEMPLE
-request.append("Message = 'Donnee a supprimer'")
-request.append("Message like 'Donnee a supp%'")
+request = [
+"Message = 'Donnee a supprimer'",
+"Message like 'Donnee a supp%'",
+]
 
-
-
-for i in request:
-        if request.index(i) < 1 :
-                value = request[0]
-        else:
-                value = value + " OR " + i
-
+value = " OR ".join(request)
 
 mycursor = mydb.cursor()
 
-sql = "Delete from " + table + " where " + value + ";"
+sql = f"DELETE FROM {table} WHERE {' OR '.join(request)};"
+
 mycursor.execute(sql)
 mydb.commit()
 print(mycursor.rowcount, "rows in set.")
@@ -36,5 +32,5 @@ print(mycursor.rowcount, "rows in set.")
 mycursor.close()
 mydb.close()
 
-tps2 = time.time()
-print("Execute time :", tps2 - tps1)
+stop = time.time()
+print("Execute time :", stop - start)
