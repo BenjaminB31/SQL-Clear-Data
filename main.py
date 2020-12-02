@@ -19,8 +19,6 @@ request = [
 "Message like 'Donnee a supp%'",
 ]
 
-value = " OR ".join(request)
-
 mycursor = mydb.cursor()
 
 sql = f"DELETE FROM {table} WHERE {' OR '.join(request)};"
